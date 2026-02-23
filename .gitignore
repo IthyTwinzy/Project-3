@@ -1,3 +1,5 @@
 # VS Code
 *.code-workspace
 .vscode
+temp.json 
+tasks.json

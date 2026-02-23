@@ -1,21 +1,42 @@
 from mcp.server.fastmcp import FastMCP
-from contextlib import asynccontextmanager
 from dataclasses import dataclass
+import sys
+import json 
+import os
+
+# SERVER INITIALIZATION
+mcp = FastMCP("Todo List Server")
 
 @dataclass
 class AppContext:
-    """Stores global data used for the todolist"""
-    task_db: dict
+    """Stores context data used for the todolist"""
+    db: dict = None
 
-@asynccontextmanager
-async def app_lifespan():
-    """Manages the todo list database"""
-    data: dict = None # Get json from database
+# Reads from db
+def read_db():
+    """Gets data from the todo list db"""
 
-    try:
-        yield AppContext(task_db = data)
-    finally:
-        pass# Close the database
+    new_db = None
+    if os.path.exists("tasks.json"):
+        with open("tasks.json", 'r') as task_file:
+            new_db: dict = json.load(task_file)
+        AppContext.db = new_db
     
-# Creates the Server
-mcp = FastMCP("Todo List Server", lifespan=app_lifespan)
+# Writes to db
+def write_db():
+    """Writes data to the database"""
+    
+    if AppContext.db != None:
+        with open("temp.json", 'w') as task_file:
+            json.dump(AppContext.db, task_file)
+        os.replace("temp.json", "tasks.json")
+
+# Starts the program and handles file recources
+if __name__ == "__main__":
+    try:
+        read_db()
+        mcp.run()
+    except (KeyboardInterrupt):
+        sys.stderr.write("Server exited via keyboard interupt")
+    finally:
+        write_db()
