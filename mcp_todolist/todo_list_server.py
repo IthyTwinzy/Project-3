@@ -17,8 +17,8 @@ def read_db():
     """Gets data from the todo list db"""
 
     new_db = None
-    if os.path.exists("tasks.json"):
-        with open("tasks.json", 'r') as task_file:
+    if os.path.exists("output/tasks.json"):
+        with open("output/tasks.json", 'r') as task_file:
             new_db: dict = json.load(task_file)
         AppContext.db = new_db
     
@@ -26,17 +26,21 @@ def read_db():
 def write_db():
     """Writes data to the database"""
     
-    if AppContext.db != None:
-        with open("temp.json", 'w') as task_file:
-            json.dump(AppContext.db, task_file)
-        os.replace("temp.json", "tasks.json")
+    # Creates the output directory
+    if not os.path.exists("output"):
+        os.mkdir("output")
+
+    with open("output/temp.json", 'w') as task_file:
+        json.dump(AppContext.db, task_file)
+    os.replace("output/temp.json", "output/tasks.json")
 
 # Starts the program and handles file recources
 if __name__ == "__main__":
     try:
         read_db()
+        sys.stderr.write("Server started\n")
         mcp.run()
     except (KeyboardInterrupt):
-        sys.stderr.write("Server exited via keyboard interupt")
+        sys.stderr.write("Server exited via keyboard interupt\n")
     finally:
         write_db()
