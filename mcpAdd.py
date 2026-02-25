@@ -1,0 +1,7 @@
+import json
+
+entryData = {
+    entries: {
+        }
+    }
+
