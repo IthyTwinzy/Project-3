@@ -10,17 +10,12 @@ class TodoDatabase:
     def __init__(self) -> None:
         """Populates the database from a json file"""
 
-        self.data: dict = {}        # This is what will be writen back to the json 
-        self.flat_data: dict = {}   # This is a flatened view of the DB and sould be updated with "data"
+        self.data: dict = {}        # This is what will be writen back to the json and stores a flattened todo list
 
         # Populates the "data" dictionary with data from the file
         if os.path.exists("output/tasks.json") and os.path.getsize("output/tasks.json") != 0:
             with open("output/tasks.json", 'r') as task_file:
                 self.data = json.load(task_file)
-            
-        # Creates a flattened view of the data
-        for tasks in self.data.values():
-            self.flat_data.update(tasks)
 
         # Makes the database close automatically on exit
         atexit.register(self.close)
