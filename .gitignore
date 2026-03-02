@@ -1,5 +1,10 @@
 # VS Code
 *.code-workspace
 .vscode
+
+# Project Specific
 temp.json 
 tasks.json
+
+# Python
+__pycache__
