@@ -2,7 +2,7 @@ from mcp.server.fastmcp import FastMCP
 import sys
 
 from todo_database import DB
-from mcp_todolist.delete_task import delete_task
+from mcp_todolist.delete import delete_task
 
 # Initializes the server
 mcp = FastMCP("Todo List Server")
