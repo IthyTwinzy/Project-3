@@ -10,7 +10,7 @@ class TodoDatabase:
     def __init__(self) -> None:
         """Populates the database from a json file"""
 
-        self.data: dict = {}        # This is what will be writen back to the json and stores a flattened todo list
+        self.data: dict = {}       # This is what will be writen back to the json and stores a flattened todo list
 
         # Populates the "data" dictionary with data from the file
         if os.path.exists("output/tasks.json") and os.path.getsize("output/tasks.json") != 0:
@@ -29,7 +29,7 @@ class TodoDatabase:
             os.mkdir("output")
 
         with open("output/temp.json", 'w') as task_file:
-            json.dump(self.data, task_file)
+            json.dump(self.data, task_file, indent=2)
         os.replace("output/temp.json", "output/tasks.json")
 
 # Varriable that stores the darabase that will be used by this program
