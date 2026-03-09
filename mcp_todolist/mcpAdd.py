@@ -4,7 +4,7 @@ import mcp
 
 @mcp.tool() # Defines the function as a tool function, usable by the MCP
 def add(task, details, due, dueTime):
-    """ Prompts the user four times for input data """
+    """ Prompts the user four times for input data, then adds this data to the database """
     task = input("Describe the task you want to add briefly ")
     details = input("Describe the task you want to add in detail ")
     due = input("When is it due by? (MONTH/DAY/YEAR Ex. 03/04/2026) ")
