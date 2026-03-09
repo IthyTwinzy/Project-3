@@ -1,14 +1,13 @@
 from todo_database import DB
+from typing import Annotated
 import sys
-import mcp
 
-@mcp.tool() # Defines the function as a tool function, usable by the MCP
-def add(task, details, due, dueTime):
-    """ Prompts the user four times for input data, then adds this data to the database """
-    task = input("Describe the task you want to add briefly ")
-    details = input("Describe the task you want to add in detail ")
-    due = input("When is it due by? (MONTH/DAY/YEAR Ex. 03/04/2026) ")
-    dueTime = input("What time is it due by? (Hour:Minute Ex. 01:50) ")
+def add_task(
+        task: Annotated[str, "A brief task description i.e. 'Laundry', used as the key for each entry in the dictionary"],
+        details: Annotated[str, "A detailed task description i.e. 'Wash clothes, dry clothes, fold clothes'"],
+        due: Annotated[str, "The due date (Format: Month/Day/Year, Ex. 03/04/2026)"],
+        dueTime: Annotated[str, "The time due (Ex. 14:00)"]):
+    """ Inputs the task into the database using the data provided for this function """
 
     # Adds the data which the user input to the database dictionary
     DB.data[task] = {
