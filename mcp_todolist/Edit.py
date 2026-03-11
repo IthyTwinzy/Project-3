@@ -1,4 +1,6 @@
-import json
+from todo_database import DB
+from typing import Annotated
+import sys
 
 #Structure for individual task
 #brief_description(str) : [extended_description(str), time_due(str), is_completed(bool)]
@@ -27,27 +29,21 @@ import json
 
 #Function needs to extract data from a json file in order to find a particular task and its corresponding details, change those details
 #and then return them to the json file
-def edit():
-    wantedEntry = input("What entry would you like to edit? Give the entry's shortened name:")
+def edit_task(requestedEntry: Annotated[str, "The name of the task that the user wants to edit."],
+         newDescription: Annotated[str, "A description of the task."] | None=None,
+         newDate: Annotated[str, "The date the task is due on, format as numbers in the form of MONTH/DAY/YEAR"] | None=None,
+         newTime: Annotated[str, "The time the task is due at on the given day, format as a 24 hour digital clock in the form of 00:00"] | None=None)
+    """Changes a specific task in the list of tasks based on the parameters provided"""
     
-    entriesKeys = dictEx.keys() #The dictionary that is being used for storing tasks
-    foundEntry = None
-    for key in entriesKeys:
-        if key == wantedEntry:
-            foundEntry = key
-            newDesc = input("Enter your new description: ")
-            dictEx[foundEntry]['description'] = newDesc
-            
-            newDueDate = input("Enter your new due date: ")
-            dictEx[foundEntry]['date_due'] = newDueDate
-            
-            newDueTime = input("Enter your new due time: ")
-            dictEx[foundEntry]['time_due'] = newDueTime
-            
-            break
+    if requestedEntry in DB.data:
         
-    if foundEntry is None:
-        print("Entry not found")
+        if newDescription != None:
+            DB[requestedEntry]['details'] = newDescription
+        if newDate != None:
+            DB[requestedEntry]['due date'] = newDate
+        if newTime != None:
+            DB[requestedEntry]['due time'] = newTime
+            
     
 
 #edit() #Example run

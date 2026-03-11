@@ -5,6 +5,7 @@ from todo_database import DB
 from delete import delete_task
 from view_tasks import view_tasks
 from mcpAdd import add_task
+from Edit import edit_task
 
 # Initializes the server
 mcp = FastMCP("Todo List Server")
@@ -13,6 +14,7 @@ mcp = FastMCP("Todo List Server")
 mcp.add_tool(view_tasks)
 mcp.add_tool(delete_task)
 mcp.add_tool(add_task)
+mcp.add_tool(edit_task)
 
 # Starts the server
 if __name__ == "__main__":
