@@ -38,11 +38,11 @@ def edit_task(requestedEntry: Annotated[str, "The name of the task that the user
     if requestedEntry in DB.data:
         
         if newDescription != None:
-            DB[requestedEntry]['details'] = newDescription
+            DB.data[requestedEntry]['details'] = newDescription
         if newDate != None:
-            DB[requestedEntry]['due date'] = newDate
+            DB.data[requestedEntry]['due date'] = newDate
         if newTime != None:
-            DB[requestedEntry]['due time'] = newTime
+            DB.data[requestedEntry]['due time'] = newTime
             
     
 
