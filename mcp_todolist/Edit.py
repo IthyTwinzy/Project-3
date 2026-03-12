@@ -32,7 +32,7 @@ import sys
 def edit_task(requestedEntry: Annotated[str, "The name of the task that the user wants to edit."],
          newDescription: Annotated[str, "A description of the task."] | None=None,
          newDate: Annotated[str, "The date the task is due on, format as numbers in the form of MONTH/DAY/YEAR"] | None=None,
-         newTime: Annotated[str, "The time the task is due at on the given day, format as a 24 hour digital clock in the form of 00:00"] | None=None)
+         newTime: Annotated[str, "The time the task is due at on the given day, format as a 24 hour digital clock in the form of 00:00"] | None=None):
     """Changes a specific task in the list of tasks based on the parameters provided"""
     
     if requestedEntry in DB.data:

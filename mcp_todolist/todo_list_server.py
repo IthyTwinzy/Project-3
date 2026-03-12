@@ -1,5 +1,6 @@
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP, Client
 import sys
+from typing import Annotated
 
 from todo_database import DB
 from delete import delete_task
@@ -9,7 +10,8 @@ from Edit import edit_task
 
 # Initializes the server
 mcp = FastMCP("Todo List Server")
-    
+client = Client(mcp)
+
 # Sets up all tools needed for the server
 mcp.add_tool(view_tasks)
 mcp.add_tool(delete_task)
@@ -20,6 +22,7 @@ mcp.add_tool(edit_task)
 if __name__ == "__main__":
     try:
         sys.stderr.write("Server started\n")
+        
         mcp.run()
     except (KeyboardInterrupt):
         sys.stderr.write("Server exited via keyboard interupt\n")
