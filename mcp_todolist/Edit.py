@@ -1,5 +1,5 @@
 from todo_database import DB
-from typing import Annotated
+from typing import Annotated, Optional
 import sys
 
 #Structure for individual task
@@ -30,9 +30,9 @@ import sys
 #Function needs to extract data from a json file in order to find a particular task and its corresponding details, change those details
 #and then return them to the json file
 def edit_task(requestedEntry: Annotated[str, "The name of the task that the user wants to edit."],
-         newDescription: Annotated[str, "A description of the task."] | None=None,
-         newDate: Annotated[str, "The date the task is due on, format as numbers in the form of MONTH/DAY/YEAR"] | None=None,
-         newTime: Annotated[str, "The time the task is due at on the given day, format as a 24 hour digital clock in the form of 00:00"] | None=None):
+         newDescription: Annotated[str, "A description of the task."] = None,
+         newDate: Annotated[str, "The date the task is due on, format as numbers in the form of MONTH/DAY/YEAR"] = None,
+         newTime: Annotated[str, "The time the task is due at on the given day, format as a 24 hour digital clock in the form of 00:00"] = None):
     """Changes a specific task in the list of tasks based on the parameters provided"""
     
     if requestedEntry in DB.data:
@@ -45,5 +45,3 @@ def edit_task(requestedEntry: Annotated[str, "The name of the task that the user
             DB.data[requestedEntry]['due time'] = newTime
             
     
-
-#edit() #Example run
