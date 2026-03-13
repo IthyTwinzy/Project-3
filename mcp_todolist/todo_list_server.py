@@ -9,7 +9,7 @@ from Edit import edit_task
 
 # Initializes the server
 mcp = FastMCP("Todo List Server")
-    
+
 # Sets up all tools needed for the server
 mcp.add_tool(view_tasks)
 mcp.add_tool(delete_task)
@@ -19,7 +19,7 @@ mcp.add_tool(edit_task)
 # Starts the server
 if __name__ == "__main__":
     try:
-        sys.stderr.write("Server started\n")
+        sys.stderr.write("Server started\n")       
         mcp.run()
     except (KeyboardInterrupt):
         sys.stderr.write("Server exited via keyboard interupt\n")
